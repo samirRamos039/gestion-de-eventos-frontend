@@ -1,29 +1,64 @@
 import Swal from 'sweetalert2';
-import { nectTick } from '@vue/runtime-core';
+//import { nectTick } from '@vue/runtime-core';
+import axios from axios
 
-export function show alerta (msj, icon, focus) {
-    if(focus !== ''){
-        nextTick( () => focus.value.focus());
+export function showalerta(titulo, icono, foco){
+    if(foco !== ''){
+       document.getElementById(foco).focus();
     }
     Swal.fire({
-        title:msj,icon:icon,buttonsStyling:true
+        title:titulo,
+        icon:icono,
+        customClass:{confirmButton:'btn btn-primary',popup:'animated zoonIn'},
+        buttonsStyling:false
+
     });
 }
 
-export function confirmation(name,url,redirection){
-    const alert = Swal.mixin({buttonsStyling:true});
-    alert.fire({
-        title: '¿Estas seguro que quieres eliminar ' + name + ' ?',
-        icon: 'question', showCancelButton:true,
-        confirmButtonText: '<i class="fa-solid fa-check"></i> Continuar',
-        cancelButtonText: '<i class="fa-solid fa-ban"></i> Cancelar'
-    }).then( (result) =>{
-        if(result.isConfirmed){
-
+export function confirmation(urlSlash,id,titulo,msg){
+    var url = urlSlash+id;
+    const swalWithBootstrapButton = Swal.mixin({
+        customClass:{confirmButton:'btn btn-success me-3',cancelButton: 'btn btn-danger'},
+    });
+    swalWithBootstrapButton.fire({
+        title:titulo,
+        text:msg,
+        icon:'question',
+        showCancelButton:true,
+        confirmButtonText:'<i class="fa-solid fa-check"></i> si, eliminar',
+        cancelButtonText:'<i class="fa-solid fa-check"></i> si, eliminar'
+    }).then((res)=>{
+        if(res.isConfirmed){
+            solicitud('DELETE',{id:id},url,'Eliminado con exito');
+        }else{
+            mostrarAlerta('operacion cancelada','info');
         }
+        
+    });
+
+    Swal.fire({
+        title:titulo,
+        icon:icono,
+        customClass:{confirmButton:'btn btn-primary',popup:'animated zoonIn'},
+        buttonsStyling:false
+
     });
 }
 
-export async function sendRequest(method, params, url, redirect=''){
-    
+export function solicitud(method, params, url,msg){
+    axios({method:metodo,url:url,data:parametros}).them(function(res){
+         const estado = res.status
+         if(estado == 200){
+            mostrarAlerta(meg,'success');
+            window.setTimeout(function(){
+                window.location.href='/'
+
+            },1000);
+         }else{
+            mostrarAlerta('wrong','error')
+         }
+    }).catch(function(error){
+        mostrarAlerta('error', 'error')
+    });
 }
+//jjjjjj
