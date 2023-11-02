@@ -32,7 +32,7 @@
                   <i class="fa-solid fa-trash"></i>
                 </button>
               </td>
-              <!-- Agrega más celdas según los datos de la API -->
+              <!-- Agrega más celdas según los datos de la API  test -->
             </tr>
           </tbody>
         </table>
