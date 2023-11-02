@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import {confirmation, solicitud} from '../functions';
 export default {
   data() {
     return {
