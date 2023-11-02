@@ -1,17 +1,18 @@
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 //import { nectTick } from '@vue/runtime-core';
-import axios from axios
+import axios from "axios";
 
-export function showalerta(titulo, icono, foco){
-    if(foco !== ''){
+export function showalerta(titulo, icono, foco=''){
+    
+    if(foco!==''){
        document.getElementById(foco).focus();
     }
+    
     Swal.fire({
         title:titulo,
         icon:icono,
         customClass:{confirmButton:'btn btn-primary',popup:'animated zoonIn'},
         buttonsStyling:false
-
     });
 }
 
