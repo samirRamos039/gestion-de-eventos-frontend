@@ -20,7 +20,7 @@
               <td>{{ user.full_name }}</td>
               <td>{{ user.private }}</td>
               <td>
-                <router-link :to="{ path: 'view/' + user.id }" class="btn btn-info">
+                <router-link :to="{path:'view/' + user.id}" class="btn btn-info">
                   <i class="fa-solid fa-eye"></i>
                 </router-link>
                 &nbsp;
@@ -28,7 +28,7 @@
                   <i class="fa-solid fa-edit"></i>
                 </router-link>
                 &nbsp;
-                <button class="btn btn-danger">
+                <button class="btn btn-danger" v-on:click="eliminar(user.id, user.name)">
                   <i class="fa-solid fa-trash"></i>
                 </button>
               </td>
@@ -67,6 +67,11 @@ export default {
         // Manejar errores de la solicitud
         console.error('There has been a problem with your fetch operation:', error);
       });
+  },
+  methods:{
+    eliminar(id,nombre){
+      confirmation('https://api.github.com/users/hacktivist123/repos/',id,'eliminar','desea eliminar')
+    }
   }
 };
 </script>
