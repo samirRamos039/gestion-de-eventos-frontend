@@ -29,7 +29,7 @@ export function confirmation(name,url,redirecturl){
         icon:'question',
         showCancelButton:true,
         confirmButtonText:'<i class="fa-solid fa-check"></i> si, eliminar',
-        cancelButtonText:'<i class="fa-solid fa-check"></i> cancel'
+        cancelButtonText:'<i class="fa-solid fa-check"></i> cancelar'
     }).then((res)=>{
         if(res.isConfirmed){
             solicitud('DELETE',{id:id},url,'Eliminado con exito');
@@ -42,7 +42,7 @@ export function confirmation(name,url,redirecturl){
     
 }
 
-export function solicitud(method, params, url,msg){
+export async function solicitud(method, params, url,msg){
     axios({method:metodo,url:url,data:parametros}).them(function(res){
          const estado = res.status
          if(estado == 200){
