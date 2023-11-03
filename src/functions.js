@@ -1,3 +1,4 @@
+
 import Swal from 'sweetalert2';
 import { nextTick } from '@vue/runtime-core';
 import axios from 'axios'
@@ -5,11 +6,15 @@ import axios from 'axios'
 export function showalerta(msj, icono, focus){
     if(focus !== ""){
        nextTick(()=>focus.value.focus)
+
     }
+    
     Swal.fire({
         title:msj,
         icon:icono,
+
         buttonsStyling:true,
+
     });
 }
 
