@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '../stores/auth'
 import HomeView from '../views/HomeView.vue'
 import EditUser from '../views/EditUser.vue'
 import ListUser from '../views/ListUser.vue'
@@ -40,7 +41,7 @@ const router = createRouter({
     }
   ]
 })
-/*
+
 router.beforeEach(async(to)=>{
   const publicPages = ['/login','/registro']
   const authRequired = !publicPages.includes(to.path)
@@ -50,7 +51,7 @@ router.beforeEach(async(to)=>{
     return '/login'
   }
 })
-*/
+
 
 
 export default router
