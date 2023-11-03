@@ -1,32 +1,30 @@
 import Swal from 'sweetalert2';
-//import { nectTick } from '@vue/runtime-core';
-import axios from axios
+import { nextTick } from '@vue/runtime-core';
+import axios from 'axios'
 
-export function showalerta(titulo, icono, foco){
-    if(foco !== ''){
-       document.getElementById(foco).focus();
+export function showalerta(msj, icono, focus){
+    if(focus !== ""){
+       nextTick(()=>focus.value.focus)
     }
     Swal.fire({
-        title:titulo,
+        title:msj,
         icon:icono,
-        customClass:{confirmButton:'btn btn-primary',popup:'animated zoonIn'},
-        buttonsStyling:false
-
+        buttonsStyling:true,
     });
 }
 
-export function confirmation(urlSlash,id,titulo,msg){
-    var url = urlSlash+id;
-    const swalWithBootstrapButton = Swal.mixin({
-        customClass:{confirmButton:'btn btn-success me-3',cancelButton: 'btn btn-danger'},
+export function confirmation(name,url,redirecturl){
+    
+    const alert = Swal.mixin({
+        buttonsStyling:true
     });
-    swalWithBootstrapButton.fire({
-        title:titulo,
+    alert.fire({
+        title:'ESTAS SEGURO '+name+'?',
         text:msg,
         icon:'question',
         showCancelButton:true,
         confirmButtonText:'<i class="fa-solid fa-check"></i> si, eliminar',
-        cancelButtonText:'<i class="fa-solid fa-check"></i> si, eliminar'
+        cancelButtonText:'<i class="fa-solid fa-check"></i> cancel'
     }).then((res)=>{
         if(res.isConfirmed){
             solicitud('DELETE',{id:id},url,'Eliminado con exito');
@@ -36,13 +34,7 @@ export function confirmation(urlSlash,id,titulo,msg){
         
     });
 
-    Swal.fire({
-        title:titulo,
-        icon:icono,
-        customClass:{confirmButton:'btn btn-primary',popup:'animated zoonIn'},
-        buttonsStyling:false
-
-    });
+    
 }
 
 export function solicitud(method, params, url,msg){
@@ -61,4 +53,7 @@ export function solicitud(method, params, url,msg){
         mostrarAlerta('error', 'error')
     });
 }
-//jjjjjj
+
+export async function sendReques(method,params,url,redirecturl=''){
+
+}
