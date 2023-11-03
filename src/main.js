@@ -15,15 +15,16 @@ window.axios.defaults.headers.common['Accept']= 'aplication/json'
 window.axios.defaults.headers.common['content-type']= 'aplication/json'
 window.axios.defaults.headers.common['X-requested-with']= 'XMLHttpRequest'
 window.axios.defaults.withCredentials = true
-
+/*
 const pinia = createPinia
 pinia.use(({store}) => {
     store.router = markRaw(router)
 })
 pinia.use(reatePersistedState)
+*/
 const app = createApp(App)
 
-app.use(pinia)
+app.use(createPinia())
 app.use(router)
 
 app.mount('#app')

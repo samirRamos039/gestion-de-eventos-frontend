@@ -1,58 +1,40 @@
+<script setup>
+import {ref} from 'vue';
+import {useAuthStore} from '../stores/auth';
+const authStore=useAuthStore();
+const form = ref({email:'', password:''}); 
+</script>
 <template>
-  <div class="col-lg-4 offset-lg-2 ">
-    <form>
-      <!-- Email input -->
-      <div class="form-outline mb-4">
-        <input type="email" id="form2Example1" class="form-control" />
-        <label class="form-label" for="form2Example1">Email address</label>
-      </div>
-
-      <!-- Password input -->
-      <div class="form-outline mb-4">
-        <input type="password" id="form2Example2" class="form-control" />
-        <label class="form-label" for="form2Example2">Password</label>
-      </div>
-
-      <!-- 2 column grid layout for inline styling -->
-      <div class="row mb-4">
-        <div class="col d-flex justify-content-center">
-          <!-- Checkbox -->
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-            <label class="form-check-label" for="form2Example31"> Remember me </label>
+  <div class="row mt-5">
+    <div class="col-md-4 offset-md-4">
+      <div class="card border border-success">
+        <div class="card-header bg-success border border-success text-white">
+          LOGIN
+        </div>
+      <div class="card-body">
+        <form @submit.prevent="$event => authStore.login(form)">
+          <div class="input-group mb-3">
+            <span class="input-group-text">
+              <i class="fa-solid fa-at"></i>
+            </span>
+            <input autofocus type="email" v-model="form.email"
+            placeholder="Email" class="form-control">
           </div>
-        </div>
-
-        <div class="col">
-          <!-- Simple link -->
-          <a href="#!">Forgot password?</a>
-        </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">
+              <i class="fa-solid fa-key"></i>
+            </span>
+            <input type="password" v-model="form.password"
+            placeholder="Password" class="form-control">
+          </div>
+          <div class="d-grid col-10 mx-auto">
+            <button class="btn btn-black">Login</button>
+          </div>
+          <router-link :to="{path : 'registro'}">registro</router-link>
+        </form>
+      </div> 
       </div>
-
-      <!-- Submit button -->
-      <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
-
-      <!-- Register buttons -->
-      <div class="text-center">
-        <p>Not a member? <a href="#!">Register</a></p>
-        <p>or sign up with:</p>
-        <button type="button" class="btn btn-link btn-floating mx-1">
-          <i class="fab fa-facebook-f"></i>
-        </button>
-
-        <button type="button" class="btn btn-link btn-floating mx-1">
-          <i class="fab fa-google"></i>
-        </button>
-
-        <button type="button" class="btn btn-link btn-floating mx-1">
-          <i class="fab fa-twitter"></i>
-        </button>
-
-        <button type="button" class="btn btn-link btn-floating mx-1">
-          <i class="fab fa-github"></i>
-        </button>
-      </div>
-
-    </form>
+    </div>
   </div>
+    
 </template>

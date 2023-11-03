@@ -38,9 +38,19 @@ const router = createRouter({
       name: 'registro',
       component: Registro
     }
-    
-   
   ]
 })
+/*
+router.beforeEach(async(to)=>{
+  const publicPages = ['/login','/registro']
+  const authRequired = !publicPages.includes(to.path)
+  const auth = useAuthStore()
+  if (authRequired && !auth.user){
+    auth.returnUrl = to.fullPath
+    return '/login'
+  }
+})
+*/
+
 
 export default router
