@@ -24,7 +24,7 @@ export function confirmation(name,url,redirecturl){
         buttonsStyling:true
     });
     alert.fire({
-        title:'ESTAS SEGURO '+name+'?',
+        title:'ESTAS SEGURO ELIMINAR '+name+'?',
         text:msg,
         icon:'question',
         showCancelButton:true,
@@ -59,6 +59,6 @@ export async function solicitud(method, params, url,msg){
     });
 }
 
-export async function sendReques(method,params,url,redirecturl=''){
-
+export async function sendRequest(method,params,url,redirecturl=''){
+    
 }
