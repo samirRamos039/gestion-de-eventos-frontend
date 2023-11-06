@@ -1,29 +1,83 @@
+
 import Swal from 'sweetalert2';
-import { nectTick } from '@vue/runtime-core';
+import { nextTick } from '@vue/runtime-core';
+import axios from 'axios';
+//import {useAuthStore} from '@stores/auth'
 
-export function show alerta (msj, icon, focus) {
-    if(focus !== ''){
-        nextTick( () => focus.value.focus());
+
+
+
+export function showalerta(msj, icono, focus){
+    if(focus !== ""){
+       nextTick(()=>focus.value.focus)
+
     }
-    Swal.fire({
-        title:msj,icon:icon,buttonsStyling:true
-    });
-}
-
-export function confirmation(name,url,redirection){
-    const alert = Swal.mixin({buttonsStyling:true});
-    alert.fire({
-        title: '¿Estas seguro que quieres eliminar ' + name + ' ?',
-        icon: 'question', showCancelButton:true,
-        confirmButtonText: '<i class="fa-solid fa-check"></i> Continuar',
-        cancelButtonText: '<i class="fa-solid fa-ban"></i> Cancelar'
-    }).then( (result) =>{
-        if(result.isConfirmed){
-
-        }
-    });
-}
-
-export async function sendRequest(method, params, url, redirect=''){
     
+    Swal.fire({
+        title:msj,
+        icon:icono,
+
+        buttonsStyling:true,
+
+    });
+}
+
+export function confirmation(name,url,redirecturl){
+    
+    const alert = Swal.mixin({
+        buttonsStyling:true
+    });
+    alert.fire({
+        title:'ESTAS SEGURO ELIMINAR '+name+'?',
+        text:msg,
+        icon:'question',
+        showCancelButton:true,
+        confirmButtonText:'<i class="fa-solid fa-check"></i> si, eliminar',
+        cancelButtonText:'<i class="fa-solid fa-check"></i> cancel'
+    }).then((res)=>{
+        if(res.isConfirmed){
+            solicitud('DELETE',{id:id},url,'Eliminado con exito');
+        }else{
+            mostrarAlerta('operacion cancelada','info');
+        }
+        
+    });
+
+    
+}
+
+export function solicitud(method, params, url,msg){
+    axios({method:metodo,url:url,data:parametros}).them(function(res){
+         const estado = res.status
+         if(estado == 200){
+            mostrarAlerta(meg,'success');
+            window.setTimeout(function(){
+                window.location.href='/'
+
+            },1000);
+         }else{
+            mostrarAlerta('wrong','error')
+         }
+    }).catch(function(error){
+        mostrarAlerta('error', 'error')
+    });
+}
+
+export async function sendRequest(method,params,url,redirecturl=''){
+    const authStore = useAuthStore();
+    axios.defaults.headers.common['Authorization'] = 'Bearer' +authStore.authToken;
+    let res;
+    await axios({mthod:method, url:url, data:param}).then(
+        Response =>{
+            res = Response.data.status,
+            showalerta(Response.data.msj, 'success',''),
+            setTimeout(()=> (redirect !=='')? window.location.href = redirect:'',2000)
+        }
+    ).catch((error)=>{
+        let desc='';
+        res = error.Response.data.status;
+        error.Response.data.error.map((e)=>{desc= desc+''+e})
+        showalerta(desc,'error','')
+    }) 
+    return res;
 }
