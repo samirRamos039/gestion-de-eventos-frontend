@@ -12,33 +12,33 @@ export const useAuthStore = defineStore('auth',{
         async getToken(){
             await axios.get('/sanctum/csrf-cookie');
         },
-        async login(from){
+        async login(form){
             await this.getToken();
-            await axios.post('/api/auth/login',from).then(
+            await axios.post('/api/auth/login',form).then(
                 (res) => {
                     this.authToken = res.data.token;
                     this.authUser = res.data.token;
-                    this.router.push('/usuarios');
+                    this.router.push('/views');
                     // min 
                 }
             ).catch(
                 (errors)=> {
                     let desc = '';
                     errors.res.data.errors.map(
-                        (e) => {desc = desc + ' ' + e}
+                        (e) => {desc = desc + ' '+e}
                     )
-                    showalerta(desc, 'error', '');
+                    showalerta(desc,'error','');
                     
                 }
             )
         },
 
-        async register(from){
+        async register(form){
             await this.getToken();
-            await axios.post('/api/auth/register',from).then(
+            await axios.post('/api/auth/registro',form).then(
                 (res) => {
-                    showalerta(res,data,message,'success', '')
-                    setTimeout(() => this.router.push('/login'), 2000)
+                    showalerta(res,data,message,'success', '');
+                    setTimeout(() => this.router.push('/login'), 2000);
                     
                 }
             ).catch(
@@ -54,7 +54,7 @@ export const useAuthStore = defineStore('auth',{
         },
 
         async logout(){
-            await axios.get('api/auth,logout', this.authToken)
+            await axios.get('api/auth/logout', this.authToken);
             this.authToken = res.data.token;
             this.authUser = res.data.token;
             this.router.push('/login');

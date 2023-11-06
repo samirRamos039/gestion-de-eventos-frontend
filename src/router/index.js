@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '../stores/auth'
 import HomeView from '../views/HomeView.vue'
 import EditUser from '../views/EditUser.vue'
 import ListUser from '../views/ListUser.vue'
 import Login from '../views/Login.vue'
 import Registro from '../views/Registro.vue'
+import Index from '../views/Index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,6 +19,11 @@ const router = createRouter({
       path: '/new',
       name: 'new',
       component: EditUser
+    },
+    {
+      path: '/index',
+      name: 'index',
+      component: Index
     },
     {
       path: '/edit/:id',
@@ -38,9 +45,20 @@ const router = createRouter({
       name: 'registro',
       component: Registro
     }
-    
-   
   ]
 })
+
+router.beforeEach(async(to)=>{
+  const publicPages = ['/login','/registro']
+  const authRequired = !publicPages.includes(to.path)
+  const auth = useAuthStore()
+  if (authRequired && !auth.user){
+    auth.returnUrl = to.fullPath
+    return '/login'
+  }
+})
+//ddddddd
+
+
 
 export default router
