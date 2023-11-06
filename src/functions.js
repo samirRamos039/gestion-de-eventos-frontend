@@ -1,7 +1,11 @@
 
 import Swal from 'sweetalert2';
 import { nextTick } from '@vue/runtime-core';
-import axios from 'axios'
+import axios from 'axios';
+//import {useAuthStore} from '@stores/auth'
+
+
+
 
 export function showalerta(msj, icono, focus){
     if(focus !== ""){
@@ -60,5 +64,20 @@ export function solicitud(method, params, url,msg){
 }
 
 export async function sendRequest(method,params,url,redirecturl=''){
-    
+    const authStore = useAuthStore();
+    axios.defaults.headers.common['Authorization'] = 'Bearer' +authStore.authToken;
+    let res;
+    await axios({mthod:method, url:url, data:param}).then(
+        Response =>{
+            res = Response.data.status,
+            showalerta(Response.data.msj, 'success',''),
+            setTimeout(()=> (redirect !=='')? window.location.href = redirect:'',2000)
+        }
+    ).catch((error)=>{
+        let desc='';
+        res = error.Response.data.status;
+        error.Response.data.error.map((e)=>{desc= desc+''+e})
+        showalerta(desc,'error','')
+    }) 
+    return res;
 }

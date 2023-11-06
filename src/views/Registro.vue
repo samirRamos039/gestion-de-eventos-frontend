@@ -38,7 +38,7 @@
 import {ref} from 'vue';
 import {useAuthStore} from '../stores/auth';
 const authStore=useAuthStore();
-const form = ref({name:'',apodo:'',email:'', password:''}); 
+const form = ref({email:'',foto:'',nombre:'', apodo:'', password:''}); 
 </script>
 <template>
   <div class="row mt-5">
@@ -53,8 +53,22 @@ const form = ref({name:'',apodo:'',email:'', password:''});
             <span class="input-group-text">
               <i class="fa-solid fa-at"></i>
             </span>
-            <input autofocus type="text" v-model="form.name"
-            placeholder="Name" class="form-control">
+            <input autofocus type="text" v-model="form.email"
+            placeholder="Email" class="form-control">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">
+              <i class="fa-solid fa-at"></i>
+            </span>
+            <input autofocus type="text" v-model="form.foto"
+            placeholder="Foto" class="form-control">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">
+              <i class="fa-solid fa-at"></i>
+            </span>
+            <input autofocus type="text" v-model="form.nombre"
+            placeholder="Nombre" class="form-control">
           </div>
           <div class="input-group mb-3">
             <span class="input-group-text">
@@ -62,13 +76,6 @@ const form = ref({name:'',apodo:'',email:'', password:''});
             </span>
             <input autofocus type="text" v-model="form.apodo"
             placeholder="Apodo" class="form-control">
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text">
-              <i class="fa-solid fa-at"></i>
-            </span>
-            <input autofocus type="text" v-model="form.email"
-            placeholder="Email" class="form-control">
           </div>
           <div class="input-group mb-3">
             <span class="input-group-text">
