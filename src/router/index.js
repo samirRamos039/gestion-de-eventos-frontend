@@ -48,7 +48,7 @@ const router = createRouter({
   ]
 })
 
-/*router.beforeEach(async(to)=>{
+router.beforeEach(async(to)=>{
   const publicPages = ['/login','/registro']
   const authRequired = !publicPages.includes(to.path)
   const auth = useAuthStore()
@@ -56,7 +56,7 @@ const router = createRouter({
     auth.returnUrl = to.fullPath
     return '/login'
   }
-})*/
+})
 
 
 
