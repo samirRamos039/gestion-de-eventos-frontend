@@ -35,7 +35,7 @@ export const useAuthStore = defineStore('auth',{
 
         async register(form){
             await this.getToken();
-            await axios.post('/api/auth/registro',form).then(
+            await axios.post('api/v1/usuario',form).then(
                 (res) => {
                     showalerta(res,data,message,'success', '');
                     setTimeout(() => this.router.push('/login'), 2000);
@@ -58,7 +58,28 @@ export const useAuthStore = defineStore('auth',{
             this.authToken = res.data.token;
             this.authUser = res.data.token;
             this.router.push('/login');
+        },
+        /*
+        async listUsers(form){
+            await this.getToken();
+            await axios.get('/api/auth/v1/usuario',form).then(
+                (res) => {
+                    showalerta(res,data,message,'success', '');
+                    setTimeout(() => this.router.push('/login'), 2000);
+                    
+                }
+            ).catch(
+                (errors)=> {
+                    let desc = '';
+                    errors.res.data.errors.map(
+                        (e) => {desc = desc + ' ' + e}
+                    )
+                    showalerta(desc, 'error', '');
+                    
+                }
+            )
         }
+        */
     },
     persist:true
 })

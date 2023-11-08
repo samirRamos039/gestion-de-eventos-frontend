@@ -25,7 +25,7 @@
               <li><Router-link class="dropdown-item" to="/">Home</Router-link></li>
               <li><Router-link class="dropdown-item" to="/new">New user</Router-link></li>
               <li><Router-link class="dropdown-item" to="/list">List user</Router-link></li>
-              <li><Router-link class="dropdown-item" to="/registro">Sing Up</Router-link></li>
+              <li><Router-link class="dropdown-item" to="/registro">Sign Up</Router-link></li>
             </ul>
           </li>
 

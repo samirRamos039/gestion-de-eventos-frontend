@@ -51,7 +51,7 @@ export default {
   },
   mounted() {
     // Hacer una solicitud a la API usando fetch cuando el componente se monta
-    fetch('https://api.github.com/users/hacktivist123/repos')
+    fetch('https://gestion-de-eventos-production.up.railway.app/v1/usuario')
       .then(response => {
         // Verificar si la solicitud fue exitosa
         if (!response.ok) {

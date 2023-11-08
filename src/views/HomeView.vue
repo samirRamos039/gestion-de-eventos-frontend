@@ -19,7 +19,7 @@
             <td colspan="5"><h3>CARGANDO...</h3></td>
           </tr>
           <tr v-for="user in usuario" :key ="user.id">
-            <td>{{ "user.id" }}</td>
+            <td>{{ user.id }}</td>
             <td>{{ "user.node_id" }}</td>
             <td>{{ "user.name" }}</td>
             <td>{{ "user.full_name" }}</td>

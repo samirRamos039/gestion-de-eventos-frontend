@@ -1,8 +1,34 @@
 <script setup>
 import {ref} from 'vue';
 import {useAuthStore} from '../stores/auth';
+import axios from 'axios';
+
 const authStore=useAuthStore();
 const form = ref({email:'', password:''}); 
+/*
+export default{
+  data(){
+    return{
+      usuario:null,
+      cargando:false
+    }
+  },
+  mounted(){
+    this.getUser();
+  },
+  methods:{
+    getUser(){
+       this.cargando = true;
+       axios.get('https://gestion-de-eventos-production.up.railway.app/auth/login').then(
+        res =>{
+          this.usuario = res.data;
+          this.cargando = true;
+        }
+       )
+    }
+  }
+}
+*/
 </script>
 <template>
   <div class="row mt-5">

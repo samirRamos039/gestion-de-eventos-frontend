@@ -3,17 +3,17 @@ import Swal from 'sweetalert2';
 import { nextTick } from '@vue/runtime-core';
 import axios from 'axios'
 
-export function showalerta(msj, icono, focus){
-    if(focus !== ""){
-       nextTick(()=>focus.value.focus)
-
+export function showalerta(msj, icono, foco= ''){
+    if(foco !== ''){
+       //nextTick(()=>focus.value.focus)
+        document.getElementById(foco).focus();
     }
     
     Swal.fire({
         title:msj,
         icon:icono,
-
-        buttonsStyling:true,
+        //customClass:{confirmButton:'btn btn-primary'}
+        buttonsStyling:false,
 
     });
 }
@@ -42,20 +42,20 @@ export function confirmation(name,url,redirecturl){
     
 }
 
-export async function solicitud(method, params, url,msg){
-    axios({method:metodo,url:url,data:parametros}).them(function(res){
-         const estado = res.status
+export function solicitud(method,params,url,msg){
+    axios({method:method,url:url,data:params}).them(function(res){
+         const estado = res.status;
          if(estado == 200){
-            mostrarAlerta(meg,'success');
+            showalerta(msg,'success');
             window.setTimeout(function(){
                 window.location.href='/'
 
             },1000);
          }else{
-            mostrarAlerta('wrong','error')
+            showalerta('no se pudo recuperar la respuesta','error');
          }
     }).catch(function(error){
-        mostrarAlerta('error', 'error')
+        showalerta('servidor no disponible', 'error');
     });
 }
 
