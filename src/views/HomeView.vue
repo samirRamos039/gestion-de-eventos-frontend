@@ -18,12 +18,12 @@
            <tr v-if="this.cargando">
             <td colspan="5"><h3>CARGANDO...</h3></td>
           </tr>
-          <tr v-for="user in usuario" :key ="user.id">
-            <td>{{ user.id }}</td>
-            <td>{{ "user.node_id" }}</td>
-            <td>{{ "user.name" }}</td>
-            <td>{{ "user.full_name" }}</td>
-            <td>{{ "user.private" }}</td>
+          <tr v-else v-for="user, i in usuario" :key ="user.id">
+            <td v-text="(i+1)"></td>
+            <td v-text="user.id"></td>
+            <td v-text="user.email"></td>
+            <td v-text="user.apodo"></td>
+            <!-- <td v-text="user.photo"></td>–>\-->
             <td>
               <router-link :to="{path:'view/'+user.id}" class="btn btn-info">
                 <i class="fa-solid fa-eye"></i>
@@ -48,6 +48,7 @@
 
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -55,7 +56,23 @@ export default {
       cargando:false
     };
   },
-  mounted() {
+  mounted(){
+    this.getUser();
+  },
+  methods:{
+    getUser(){
+      this.cargando=true;
+      axios.get('https://gestion-de-eventos-production.up.railway.app/api/v1/usuario').then(
+      res =>{
+        this.usuario=res.data;
+        this.cargando=false;
+      }
+    );
+    } 
+    
+  }
+
+  /*mounted() {
     // Hacer una solicitud a la API usando fetch cuando el componente se monta
     fetch('https://api.github.com/users/hacktivist123/repos')
       .then(response => {
@@ -74,35 +91,8 @@ export default {
         console.error('There has been a problem with your fetch operation:', error);
       });
   }
+  */
 };
 
-/*import axios from 'axios'
 
-
-export default{
-
-  
-  data(){
-    return{
-
-      usuario:null,
-      cargando:false
-
-    }
-  },
-  mounted(){
-    this.getUser
-  },
-  methods:{
-    getUser(){
-       this.cargando = true;
-       axios.get('https://api.github.com/users/hacktivist123/repos').then(
-        res =>{
-          this.usuario = res.data;
-          this.cargando = true;
-        }
-       );
-    }
-  }
-}*/
 </script>
