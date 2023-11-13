@@ -10,7 +10,11 @@ export const useAuthStore = defineStore('auth',{
     },
     actions:{
         async getToken(){
-            await axios.get('/sanctum/csrf-cookie');
+            await axios.get('/sanctum/csrf-cookie').then(
+                (res) => {
+                    console.log("res : ", res);
+                }
+            );
         },
         async login(form){
             await this.getToken();
@@ -35,7 +39,7 @@ export const useAuthStore = defineStore('auth',{
 
         async register(form){
             await this.getToken();
-            await axios.post('/api/auth/registro',form).then(
+            await axios.post('/api/v1/usuario',form).then(
                 (res) => {
                     showalerta(res,data,message,'success', '');
                     setTimeout(() => this.router.push('/login'), 2000);
