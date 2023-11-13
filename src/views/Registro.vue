@@ -51,29 +51,29 @@
             <span class="input-group-text">
               <i class="fa-solid fa-at"></i>
             </span>
-            <input autofocus type="text" v-model="form.name"
-            placeholder="Name" id="form.name" class="form-control">
+            <input autofocus type="text" v-model="name"
+            placeholder="Name" id="name" class="form-control">
           </div>
           <div class="input-group mb-3">
             <span class="input-group-text">
               <i class="fa-solid fa-at"></i>
             </span>
-            <input autofocus type="text" v-model="form.apodo"
-            placeholder="Apodo" id="form.apodo" class="form-control">
+            <input autofocus type="text" v-model="apodo"
+            placeholder="Apodo" id="apodo" class="form-control">
           </div>
           <div class="input-group mb-3">
             <span class="input-group-text">
               <i class="fa-solid fa-at"></i>
             </span>
-            <input autofocus type="text" v-model="form.email"
-            placeholder="Email" id="form.email" class="form-control">
+            <input autofocus type="text" v-model="email"
+            placeholder="Email" id="email" class="form-control">
           </div>
           <div class="input-group mb-3">
             <span class="input-group-text">
               <i class="fa-solid fa-key"></i>
             </span>
-            <input type="password" v-model="form.password"
-            placeholder="Password" id="form.password" class="form-control">
+            <input type="password" v-model="password"
+            placeholder="Password" id="password" class="form-control">
           </div>
           <div class="d-grid col-10 mx-auto">
             <button class="btn btn-black">Send</button>
@@ -92,28 +92,34 @@ import {ref} from 'vue';
 import {useAuthStore} from '../stores/auth';
 import { showalerta, solicitud } from '../functions';
 //const authStore=useAuthStore();
-const form = ref({name:'',apodo:'',email:'', password:''}); 
+//const form = ref({name:'',apodo:'',email:'', password:'', url:'https://gestion-de-eventos-production.up.railway.app/api/v1/usuario', cargando:false}); 
 
 
 export default{
   data(){
     return{
-      form
+      //form
       //cargando:false
+      name:'',
+      apodo:'',
+      email:'', 
+      password:'', 
+      url:'https://gestion-de-eventos-production.up.railway.app/api/v1/usuario', 
+      cargando:false
     }
   },
   methods:{
     saveUser(){
-      event.preventDefault();
-      if (this.form.name.trim()===''){
+      //event.preventDefault();
+      if (this.name.trim()===''){
         showalerta('ingrese un nombre', 'warning', 'nombre');
-      }else if(this.form.email.trim()===''){
+      }else if(this.email.trim()===''){
         showalerta('ingrese un email', 'warning', 'email');
-      } else if(this.form.password.trim()===''){
+      } else if(this.password.trim()===''){
         showalerta('ingrese una contraseña', 'warning', 'contraseña');
       } else{
-        var parameters = {nombre:this.form.name.trim(),apodo:this.form.apodo.trim(),email:this.form.email.trim(),password:this.form.password.trim()}
-        solicitud('POST',parameters,'https://gestion-de-eventos-production.up.railway.app/api/v1/usuario', 'usuario registrado')
+        var parameters = {nombre:this.name.trim(),apodo:this.apodo.trim(),email:this.email.trim(),password:this.password.trim()}
+        solicitud('POST',parameters,this.url, 'usuario registrado');
       };
       
        //this.cargando = true;

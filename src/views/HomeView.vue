@@ -49,6 +49,8 @@
 
 <script>
 import axios from 'axios';
+import {confirmation, solicitud, showalerta} from '../functions'
+
 export default {
   data() {
     return {

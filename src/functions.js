@@ -18,27 +18,32 @@ export function showalerta(msj, icono, foco= ''){
     });
 }
 
-export function confirmation(name,url,redirecturl){
-    
+export function confirmation(urlSlash,id,title,message){
+    var url=urlSlash+id;
     const alert = Swal.mixin({
-        buttonsStyling:true
+        customClass:{confirmButton:'btn btn-success me-3',cancelButton:'btn btn-danger'}
     });
     alert.fire({
-        title:'ESTAS SEGURO ELIMINAR '+name+'?',
-        text:msg,
+        title:title,
+        text:message,
         icon:'question',
         showCancelButton:true,
         confirmButtonText:'<i class="fa-solid fa-check"></i> si, eliminar',
-        cancelButtonText:'<i class="fa-solid fa-check"></i> cancelar'
-    }).then((res)=>{
-        if(res.isConfirmed){
-            solicitud('DELETE',{id:id},url,'Eliminado con exito');
-        }else{
-            mostrarAlerta('operacion cancelada','info');
-        }
+        cancelButtonText:'<i class="fa-solid fa-ban"></i> Cancelar'
+        }).then((res)=>{
+            if(res.isConfirmed){
+                solicitud('DELETE',{id:id},url,'Eliminado con exito');
+            }else{
+                showalerta('operacion cancelada','info');
+            }
         
+        });
+    Swal.fire({
+        title:title,
+        icon:icono,
+        //customClass:{confirmButton:'btn btn-primary', popup:'animated zoonIn'}
+        buttonsStyling:false,
     });
-
     
 }
 
@@ -50,7 +55,7 @@ export function solicitud(method,params,url,msg){
             window.setTimeout(function(){
                 window.location.href='/'
 
-            },1000);
+            },100);
          }else{
             showalerta('no se pudo recuperar la respuesta','error');
          }
