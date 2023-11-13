@@ -64,7 +64,7 @@ export default {
   methods:{
     getUser(){
       this.cargando=true;
-      axios.get('https://gestion-de-eventos-production.up.railway.app/api/v1/usuario').then(
+      axios.get('http://localhost:8000/api/v1/usuario').then(
       res =>{
         this.usuario=res.data;
         this.cargando=false;
