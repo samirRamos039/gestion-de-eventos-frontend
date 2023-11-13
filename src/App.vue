@@ -1,7 +1,5 @@
-
-
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-dark ">
+  <nav class="navbar navbar-expand-lg navbar-light bg-secondary ">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Gestion de eventos</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -22,10 +20,10 @@
               Dropdown
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><router-link class="dropdown-item" to="/">Home</router-link></li>
-              <li><router-link class="dropdown-item" to="/new">New user</router-link></li>
-              <li><router-link class="dropdown-item" to="/list">List user</router-link></li>
-              <li><router-link class="dropdown-item" to="/registro">Sign Up</router-link></li>
+              <li><Router-link class="dropdown-item" to="/">Home</Router-link></li>
+              <li><Router-link class="dropdown-item" to="/new">New user</Router-link></li>
+              <li><Router-link class="dropdown-item" to="/list">List user</Router-link></li>
+              <li><Router-link class="dropdown-item" to="/registro">Sign Up</Router-link></li>
             </ul>
           </li>
 
