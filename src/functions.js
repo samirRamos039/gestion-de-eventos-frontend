@@ -1,7 +1,7 @@
 
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import { nextTick } from '@vue/runtime-core';
-import axios from 'axios'
+import axios from "axios";
 
 export function showalerta(msj, icono, foco= ''){
     if(foco !== ''){
@@ -12,9 +12,8 @@ export function showalerta(msj, icono, foco= ''){
     Swal.fire({
         title:msj,
         icon:icono,
-        //customClass:{confirmButton:'btn btn-primary'}
-        buttonsStyling:false,
-
+        customClass:{confirmButton:'btn btn-primary', popup:'animated zoonIn'},
+        buttonsStyling:false
     });
 }
 
@@ -41,8 +40,8 @@ export function confirmation(urlSlash,id,title,message){
     Swal.fire({
         title:title,
         icon:icono,
-        //customClass:{confirmButton:'btn btn-primary', popup:'animated zoonIn'}
-        buttonsStyling:false,
+        customClass:{confirmButton:'btn btn-primary', popup:'animated zoonIn'},
+        buttonsStyling:false
     });
     
 }

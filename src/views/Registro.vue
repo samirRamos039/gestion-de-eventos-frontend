@@ -76,7 +76,7 @@
             placeholder="Password" id="password" class="form-control">
           </div>
           <div class="d-grid col-10 mx-auto">
-            <button class="btn btn-black">Send</button>
+            <button class="btn btn-success">Send</button>
           </div>
         </form>
       </div> 
@@ -104,13 +104,13 @@ export default{
       apodo:'',
       email:'', 
       password:'', 
-      url:'https://gestion-de-eventos-production.up.railway.app/api/v1/usuario', 
+      url:'http://localhost:8000/api/v1/usuario', 
       cargando:false
     }
   },
   methods:{
     saveUser(){
-      //event.preventDefault();
+      event.preventDefault();
       if (this.name.trim()===''){
         showalerta('ingrese un nombre', 'warning', 'nombre');
       }else if(this.email.trim()===''){

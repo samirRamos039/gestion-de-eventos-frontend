@@ -10,7 +10,7 @@ import router from './router'
 import axios from 'axios'
 
 window.axios = axios
-window.axios.defaults.baseURL = 'https://gestion-de-eventos-production.up.railway.app'
+window.axios.defaults.baseURL = 'http://localhost:8000'
 window.axios.defaults.headers.common['Accept']= 'aplication/json'
 window.axios.defaults.headers.common['content-type']= 'aplication/json'
 window.axios.defaults.headers.common['X-Requested-With']= 'XMLHttpRequest'
