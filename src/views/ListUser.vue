@@ -14,7 +14,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="user in users" :key="user.id">
+            <!-- <tr v-for="user in users" :key="user.id">
               <td>{{ user.id }}</td>
               <td>{{ user.name }}</td>
               <td>{{ user.full_name }}</td>
@@ -31,9 +31,9 @@
                 <button class="btn btn-danger" v-on:click="eliminar(user.id, user.name)">
                   <i class="fa-solid fa-trash"></i>
                 </button>
-              </td>
+              </td> -->
               <!-- Agrega más celdas según los datos de la API  test -->
-            </tr>
+            <!-- </tr> -->
           </tbody>
         </table>
       </div>
@@ -42,37 +42,22 @@
 </template>
 
 <script>
-import {confirmation, solicitud} from '../functions';
-export default {
-  data() {
-    return {
-      users: []
-    };
-  },
-  mounted() {
-    // Hacer una solicitud a la API usando fetch cuando el componente se monta
-    fetch('https://api.github.com/users/hacktivist123/repos')
-      .then(response => {
-        // Verificar si la solicitud fue exitosa
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        // Parsear la respuesta JSON y asignarla a la propiedad 'users'
-        return response.json();
-      })
-      .then(data => {
-        this.users = data;
-      })
-      .catch(error => {
-        // Manejar errores de la solicitud
-        console.error('There has been a problem with your fetch operation:', error);
-      });
-  },
-  methods:{
-    eliminar(id,nombre){
-      confirmation('https://api.github.com/users/hacktivist123/repos/',id,'eliminar','desea eliminar')
-    }
-  }
-};
+// import axios from 'axios';
+// import {ref, onMounted} from 'vue';
+// import {confirmation, solicitud} from '../functions';
+// import { useAuthStore } from '../stores/auth';
+// const authStore = useAuthStore();
+// axios.defaults.headers.common['Authorization'] = 'Bearer' + authStore.authToken;
+// onMounted( () => { getContactos() } );
+// const contactos = ref([]);
+// const load = ref(false);
+// const getContactos = async () => {
+//   await axios.get('/api/v1/listarcontactos').then(
+//     response => (
+//       console.log(response.data)
+//       // contactos.value = response.data
+//     ));
+//     localStorage.value = true;
+// }
 </script>
 

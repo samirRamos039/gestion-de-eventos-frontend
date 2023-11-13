@@ -10,16 +10,13 @@ export const useAuthStore = defineStore('auth',{
     },
     actions:{
         async getToken(){
-            await axios.get('/sanctum/csrf-cookie').then(
-                (res) => {
-                    console.log("res : ", res);
-                }
-            );
+            await axios.get('/sanctum/csrf-cookie');
         },
         async login(form){
             await this.getToken();
             await axios.post('/api/auth/login',form).then(
                 (res) => {
+                    console.log(res.data);
                     this.authToken = res.data.token;
                     this.authUser = res.data.token;
                     this.router.push('/views');
@@ -28,7 +25,7 @@ export const useAuthStore = defineStore('auth',{
             ).catch(
                 (errors)=> {
                     let desc = '';
-                    errors.res.data.errors.map(
+                    errors.response.data.errors.map(
                         (e) => {desc = desc + ' '+e}
                     )
                     showalerta(desc,'error','');
@@ -40,18 +37,20 @@ export const useAuthStore = defineStore('auth',{
         async register(form){
             await this.getToken();
             await axios.post('/api/v1/usuario',form).then(
-                (res) => {
-                    showalerta(res,data,message,'success', '');
+                (res) => {  
+                    console.log("data", res.data);
+                    showalerta(res.data.message,'success', '');
                     setTimeout(() => this.router.push('/login'), 2000);
                     
                 }
-            ).catch(
-                (errors)=> {
+                ).catch(
+                  (errors)=> {
                     let desc = '';
-                    errors.res.data.errors.map(
-                        (e) => {desc = desc + ' ' + e}
-                    )
-                    showalerta(desc, 'error', '');
+                    console.log(errors.response.data);
+                    // errors.response.data.map(
+                    //     (e) => {desc = desc + ' ' + e}
+                    // )
+                    showalerta(errors.response.data.message, 'error', '');
                     
                 }
             )
@@ -65,4 +64,4 @@ export const useAuthStore = defineStore('auth',{
         }
     },
     persist:true
-})
+});
