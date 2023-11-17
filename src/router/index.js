@@ -1,33 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
-import HomeView from '../views/HomeView.vue'
 import EditUser from '../views/EditUser.vue'
-import ListUser from '../views/ListUser.vue'
 import Login from '../views/Login.vue'
 import Registro from '../views/Registro.vue'
+
+//contactos
+import contactos from '../views/Contactos/Index.vue'
+import crearContactos from '../views/Contactos/Create.vue'
+import editarContactos from '../views/Contactos/Edit.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView
-    },
-    {
-      path: '/new',
-      name: 'new',
-      component: EditUser
-    },
-    {
-      path: '/edit/:id',
+      path: '/edituser/:id',
       name: 'edit',
       component: EditUser
-    },
-    {
-      path: '/list',
-      name: 'list',
-      component: ListUser
     },
     {
       path: '/login',
@@ -38,6 +27,21 @@ const router = createRouter({
       path: '/registro',
       name: 'registro',
       component: Registro
+    },
+    {
+      path: '/contactos',
+      name: 'contactos',
+      component: contactos
+    },
+    {
+      path: '/editarContactos/:id',
+      name: 'editarContactos',
+      component: editarContactos
+    },
+    {
+      path: '/crearContactos',
+      name: 'crearContactos',
+      component: crearContactos
     }
   ]
 })
