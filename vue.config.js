@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath: "/gestion-eventosgestion-de-eventos-frontend/"
+    publicPath: "/gestion-de-eventos-frontend/"
 }
