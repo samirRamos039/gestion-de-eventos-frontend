@@ -18,50 +18,40 @@ export const useAuthStore = defineStore('auth',{
                 (res) => {
                     console.log(res.data);
                     this.authToken = res.data.token;
-                    this.authUser = res.data.token;
-                    this.router.push('/views');
+                    this.authUser = res.data.data;
+                    this.router.push('/contactos');
                     // min 
                 }
             ).catch(
                 (errors)=> {
-                    let desc = '';
-                    errors.response.data.errors.map(
-                        (e) => {desc = desc + ' '+e}
-                    )
-                    showalerta(desc,'error','');
-                    
+                    const errores = errors.response.data.error;
+                    showalerta(errores, 'error', '');
                 }
             )
         },
 
         async register(form){
             await this.getToken();
-            await axios.post('/api/v1/usuario',form).then(
-                (res) => {  
-                    console.log("data", res.data);
+            await axios.post('api/v1/usuario',form).then(
+                (res) => {
                     showalerta(res.data.message,'success', '');
                     setTimeout(() => this.router.push('/login'), 2000);
-                    
                 }
                 ).catch(
                   (errors)=> {
-                    let desc = '';
-                    console.log(errors.response.data);
-                    // errors.response.data.map(
-                    //     (e) => {desc = desc + ' ' + e}
-                    // )
-                    showalerta(errors.response.data.message, 'error', '');
-                    
+                    console.log(errors.response);
+                    const errores = errors.response.data.message.join('\n');
+                    showalerta(errores, 'error', '');
                 }
             )
         },
 
         async logout(){
-            await axios.get('/api/auth/logout', this.authToken)
-            this.authToken = res.data.token;
-            this.authUser = res.data.token;
+            await axios.post('/api/auth/logout', this.authToken)
+            this.authToken = null;
+            this.authUser = null;
             this.router.push('/login');
-        }
+        },
     },
     persist:true
 });
