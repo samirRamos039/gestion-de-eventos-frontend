@@ -1,3 +1,5 @@
 module.exports = {
-    publicPath: "/gestion-eventosgestion-de-eventos-frontend/"
-}
+    publicPath: process.env.NODE_ENV === 'production'
+      ? '/gestion-de-eventos-frontend/'
+      : '/'
+  }

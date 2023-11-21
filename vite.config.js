@@ -6,7 +6,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "gestion-de-eventos-frontend",
+  base: '/gestion-de-eventos-frontend',
   plugins: [
     vue(),
     vueJsx(),

@@ -1,6 +1,8 @@
 <script setup>
 import {ref} from 'vue';
 import {useAuthStore} from '../stores/auth';
+import axios from 'axios';
+
 const authStore=useAuthStore();
 const form = ref({email:'', password:''}); 
 </script>
