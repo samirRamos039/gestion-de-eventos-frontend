@@ -1,7 +1,7 @@
-FROM node:16.10.0-alpine3.13 as build-stage
+FROM node:16.16.0-alpine3.13 as build-stage
 WORKDIR /app
 COPY package*.json ./
-RUN yarn install
+RUN npm install
 FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
